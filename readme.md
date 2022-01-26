@@ -10,6 +10,10 @@ This project layout is developed with Bootstrap 5 and JQuery. However, I have ma
 - Extra JQuery functions are written to let the shopping cart window popover stays on hover.
 - The website has implemented responsive UI.
 
+Please refer to https://github.com/leightonllc/IERG4210 for the git record.
+
+Demo: https://leightonllc.github.io/IERG4210/
+
 ## Phase 1 marking checklist
 1. HTML: Make good use of semantic HTML throughout the whole assignment.
 
