@@ -1,1 +1,4 @@
-body { padding-top: 55px; }
+html { overflow-x: hidden;}
+body { padding-top: 55px;}
+a { all: unset;}
+input.cart-input { width: 20px;}
