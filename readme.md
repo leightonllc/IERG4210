@@ -47,3 +47,5 @@ Demo: https://leightonllc.github.io/IERG4210/
 - e.g., Home or Home > Category1 or Home > Category1 > Product1 ✅
 - They are hyperlinks that can redirect users to an upper level of the hierarchy ✅
 
+## Statistics
+![Alt](https://repobeats.axiom.co/api/embed/ccd679e26c502ba65cea10ce16649805cc283af8.svg "Repobeats analytics image")
