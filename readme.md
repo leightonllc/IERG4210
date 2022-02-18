@@ -18,12 +18,15 @@ Please refer to https://github.com/leightonllc/IERG4210 for the git record.
 - Do not display any PHP warnings and errors to the end users <img src="https://img.shields.io/badge/-complete-green" align="right" />
 - Disable directory index in Apache <img src="https://img.shields.io/badge/-complete-green" align="right" />
 
-3. Configure the VM so that your website is accessible at http://s1155x.ierg4210.ie.cuhk.edu.hk <img src="https://img.shields.io/badge/-in%20progress-important" align="right" />
+3. Configure the VM so that your website is accessible at http://sxx.ierg4210.ie.cuhk.edu.hk <img src="https://img.shields.io/badge/-in%20progress-important" align="right" />
 
 - Apply for an elastic public IP, and ALWAYS associate it with the instantiated VM <img src="https://img.shields.io/badge/-complete-green" align="right" />
 - Submit your elastic IP through the provided Google Form link before 5pm, Feb 13, 2022 <img src="https://img.shields.io/badge/-complete-green" align="right" />
-- Submit your elastic IP through the provided Google Form link before 5pm, Feb 13, 2022 <img src="https://img.shields.io/badge/-complete-green" align="right" />
 - TAs will then assign you a domain name and configure the DNS mapping for you <img src="https://img.shields.io/badge/-in%20progress-important" align="right" />
+- Upload all your pages to the server. They should then be accessible through:
+  - http://[your-own-public-IP], or <img src="https://img.shields.io/badge/-complete-green" align="right" />
+  - http://sxx.ierg4210.ie.cuhk.edu.hk <img src="https://img.shields.io/badge/-in%20progress-important" align="right" />
+
 
 ## Phase 2B marking checklist
 
