@@ -24,7 +24,7 @@ Please refer to https://github.com/leightonllc/IERG4210 for the git record.
 - Submit your elastic IP through the provided Google Form link before 5pm, Feb 13, 2022 <img src="https://img.shields.io/badge/-complete-green" align="right" />
 - TAs will then assign you a domain name and configure the DNS mapping for you <img src="https://img.shields.io/badge/-in%20progress-important" align="right" />
 - Upload all your pages to the server. They should then be accessible through:
-  - http://[your-own-public-IP], or <img src="https://img.shields.io/badge/-complete-green" align="right" />
+  - http://3.13.126.10, or <img src="https://img.shields.io/badge/-complete-green" align="right" />
   - http://sxx.ierg4210.ie.cuhk.edu.hk <img src="https://img.shields.io/badge/-in%20progress-important" align="right" />
 
 
@@ -36,7 +36,7 @@ Please refer to https://github.com/leightonllc/IERG4210 for the git record.
 - Input boxes are used for inputting the quantity of each selected product <img src="https://img.shields.io/badge/-complete-green" align="right" />
 - A table for products (supposed to submit the list to PayPal, currently no function) <img src="https://img.shields.io/badge/-complete-green" align="right" />
 
-2.  HTML, PHP & SQL: Create an admin panel <img src="https://img.shields.io/badge/-complete-green" align="right" />
+2.  HTML, PHP & SQL: Create an admin panel http://3.13.126.10/admin/admin.php <img src="https://img.shields.io/badge/-complete-green" align="right" />
 
 - Design several HTML forms to manage products in DB <img src="https://img.shields.io/badge/-complete-green" align="right" />
   - Dropdown menu to select catid according to its name <img src="https://img.shields.io/badge/-complete-green" align="right" />
@@ -57,13 +57,13 @@ Please refer to https://github.com/leightonllc/IERG4210 for the git record.
 - Display the details of a product based on its DB record <img src="https://img.shields.io/badge/-complete-green" align="right" />
 - Display the inventory of a product based on its DB record <img src="https://img.shields.io/badge/-complete-green" align="right" />
 
-5. Support of automatic image resizing for product images <img src="https://img.shields.io/badge/-in%20progress-important" align="right" />
-- When a large image is uploaded, the server will resize it and show a thumbnail image in the panel <img src="https://img.shields.io/badge/-in%20progress-important" align="right" />
-- On the main page, display thumbnails. On the product description page, display the larger image. <img src="https://img.shields.io/badge/-in%20progress-important" align="right" />
+5. Support of automatic image resizing for product images <img src="https://img.shields.io/badge/-complete-green" align="right" />
+- When a large image is uploaded, the server will resize it and show a thumbnail image in the panel <img src="https://img.shields.io/badge/-complete-green" align="right" />
+- On the main page, display thumbnails. On the product description page, display the larger image. <img src="https://img.shields.io/badge/-complete-green" align="right" />
 
-6. Supporting HTML5 Drag-and-drop file selection in the admin panel <img src="https://img.shields.io/badge/-in%20progress-important" align="right" />
-- Create a dropping area that takes an image <img src="https://img.shields.io/badge/-in%20progress-important" align="right" />
-- Display a thumbnail (i.e. smaller width and height) if the dropped file is an image; reject it otherwise <img src="https://img.shields.io/badge/-in%20progress-important" align="right" />
+6. Supporting HTML5 Drag-and-drop file selection in the admin panel <img src="https://img.shields.io/badge/-complete-green" align="right" />
+- Create a dropping area that takes an image <img src="https://img.shields.io/badge/-complete-green" align="right" />
+- Display a thumbnail (i.e. smaller width and height) if the dropped file is an image; reject it otherwise <img src="https://img.shields.io/badge/-complete-green" align="right" />
 
 ## Statistics
 ![Alt](https://repobeats.axiom.co/api/embed/ccd679e26c502ba65cea10ce16649805cc283af8.svg "Repobeats analytics image")
