@@ -1,5 +1,4 @@
 <?php
-
 function ierg4210_DB()
 {
     // connect to the database
@@ -67,7 +66,6 @@ function ierg4210_prod_insert()
         $q->bindParam(6, $filename);
         $q->execute();
         //$lastId = $db->lastInsertId();
-
         // Note: Take care of the permission of destination folder (hints: current user is apache)
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".jpg"))
         {
@@ -76,7 +74,7 @@ function ierg4210_prod_insert()
             exit();
         }
     }
-    
+
     if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/png" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/png" && $_FILES["file"]["size"] < 10000000)
     {
 
@@ -96,7 +94,6 @@ function ierg4210_prod_insert()
         $q->bindParam(6, $filename);
         $q->execute();
         //$lastId = $db->lastInsertId();
-
         // Note: Take care of the permission of destination folder (hints: current user is apache)
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".png"))
         {
@@ -105,7 +102,7 @@ function ierg4210_prod_insert()
             exit();
         }
     }
-    
+
     if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/gif" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/png" && $_FILES["file"]["size"] < 10000000)
     {
 
@@ -125,7 +122,6 @@ function ierg4210_prod_insert()
         $q->bindParam(6, $filename);
         $q->execute();
         //$lastId = $db->lastInsertId();
-
         // Note: Take care of the permission of destination folder (hints: current user is apache)
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".gif"))
         {
@@ -213,29 +209,30 @@ function ierg4210_prod_fetchAll()
     }
 }
 
-function ierg4210_prod_fetchOne($pid){
+function ierg4210_prod_fetchOne($pid)
+{
     global $db;
     $db = ierg4210_DB();
     $q = $db->prepare("SELECT * FROM products WHERE pid = ?");
-    $q -> bindParam(1, $pid, PDO::PARAM_INT);
+    $q->bindParam(1, $pid, PDO::PARAM_INT);
     if ($q->execute())
     {
         return $q->fetchAll();
     }
- 
+
 }
 
-
-function ierg4210_cat_fetchOne($catid){
+function ierg4210_cat_fetchOne($catid)
+{
     global $db;
     $db = ierg4210_DB();
     $q = $db->prepare("SELECT * FROM categories WHERE catid = ?");
-    $q -> bindParam(1, $catid, PDO::PARAM_INT);
+    $q->bindParam(1, $catid, PDO::PARAM_INT);
     if ($q->execute())
     {
         return $q->fetchAll();
     }
- 
+
 }
 
 function ierg4210_prod_edit()
@@ -277,7 +274,6 @@ function ierg4210_prod_edit()
         $q->bindParam(7, $pid);
         $q->execute();
         //$lastId = $db->lastInsertId();
-
         // Note: Take care of the permission of destination folder (hints: current user is apache)
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".jpg"))
         {
@@ -286,7 +282,7 @@ function ierg4210_prod_edit()
             exit();
         }
     }
-    
+
     if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/png" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/jpeg" && $_FILES["file"]["size"] < 10000000)
     {
 
@@ -308,7 +304,6 @@ function ierg4210_prod_edit()
         $q->bindParam(7, $pid);
         $q->execute();
         //$lastId = $db->lastInsertId();
-
         // Note: Take care of the permission of destination folder (hints: current user is apache)
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".png"))
         {
@@ -317,7 +312,7 @@ function ierg4210_prod_edit()
             exit();
         }
     }
-    
+
     if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/gif" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/jpeg" && $_FILES["file"]["size"] < 10000000)
     {
 
@@ -339,7 +334,6 @@ function ierg4210_prod_edit()
         $q->bindParam(7, $pid);
         $q->execute();
         //$lastId = $db->lastInsertId();
-
         // Note: Take care of the permission of destination folder (hints: current user is apache)
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".gif"))
         {
