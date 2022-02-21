@@ -48,8 +48,7 @@ function ierg4210_prod_insert()
     $sql = "INSERT INTO products (catid, name, price, description, inventory) VALUES (?, ?, ?, ?, ?)";
     $q = $db->prepare($sql);
 
-    // Copy the uploaded file to a folder which can be publicly accessible at incl/img/[pid].jpg
-    if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/jpeg" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/jpeg" && $_FILES["file"]["size"] < 5000000)
+    if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/jpeg" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/jpeg" && $_FILES["file"]["size"] < 10000000)
     {
 
         $catid = $_POST["catid"];
@@ -57,18 +56,78 @@ function ierg4210_prod_insert()
         $price = $_POST["price"];
         $desc = $_POST["description"];
         $inv = $_POST["inventory"];
-        $sql = "INSERT INTO products (catid, name, price, description, inventory) VALUES (?, ?, ?, ?, ?);";
+        $filename = $name . ".jpg";
+        $sql = "INSERT INTO products (catid, name, price, description, inventory, filename) VALUES (?, ?, ?, ?, ?, ?);";
         $q = $db->prepare($sql);
         $q->bindParam(1, $catid);
         $q->bindParam(2, $name);
         $q->bindParam(3, $price);
         $q->bindParam(4, $desc);
         $q->bindParam(5, $inv);
+        $q->bindParam(6, $filename);
         $q->execute();
-        $lastId = $db->lastInsertId();
+        //$lastId = $db->lastInsertId();
 
         // Note: Take care of the permission of destination folder (hints: current user is apache)
-        if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $lastId . ".jpg"))
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".jpg"))
+        {
+            // redirect back to original page; you may comment it during debug
+            header('Location: admin.php');
+            exit();
+        }
+    }
+    
+    if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/png" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/png" && $_FILES["file"]["size"] < 10000000)
+    {
+
+        $catid = $_POST["catid"];
+        $name = $_POST["name"];
+        $price = $_POST["price"];
+        $desc = $_POST["description"];
+        $inv = $_POST["inventory"];
+        $filename = $name . ".png";
+        $sql = "INSERT INTO products (catid, name, price, description, inventory, filename) VALUES (?, ?, ?, ?, ?, ?);";
+        $q = $db->prepare($sql);
+        $q->bindParam(1, $catid);
+        $q->bindParam(2, $name);
+        $q->bindParam(3, $price);
+        $q->bindParam(4, $desc);
+        $q->bindParam(5, $inv);
+        $q->bindParam(6, $filename);
+        $q->execute();
+        //$lastId = $db->lastInsertId();
+
+        // Note: Take care of the permission of destination folder (hints: current user is apache)
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".png"))
+        {
+            // redirect back to original page; you may comment it during debug
+            header('Location: admin.php');
+            exit();
+        }
+    }
+    
+    if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/gif" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/png" && $_FILES["file"]["size"] < 10000000)
+    {
+
+        $catid = $_POST["catid"];
+        $name = $_POST["name"];
+        $price = $_POST["price"];
+        $desc = $_POST["description"];
+        $inv = $_POST["inventory"];
+        $filename = $name . ".gif";
+        $sql = "INSERT INTO products (catid, name, price, description, inventory, filename) VALUES (?, ?, ?, ?, ?, ?);";
+        $q = $db->prepare($sql);
+        $q->bindParam(1, $catid);
+        $q->bindParam(2, $name);
+        $q->bindParam(3, $price);
+        $q->bindParam(4, $desc);
+        $q->bindParam(5, $inv);
+        $q->bindParam(6, $filename);
+        $q->execute();
+        //$lastId = $db->lastInsertId();
+
+        // Note: Take care of the permission of destination folder (hints: current user is apache)
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".gif"))
         {
             // redirect back to original page; you may comment it during debug
             header('Location: admin.php');
@@ -197,7 +256,7 @@ function ierg4210_prod_edit()
     $q = $db->prepare($sql);
 
     // Copy the uploaded file to a folder which can be publicly accessible at incl/img/[pid].jpg
-    if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/jpeg" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/jpeg" && $_FILES["file"]["size"] < 5000000)
+    if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/jpeg" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/jpeg" && $_FILES["file"]["size"] < 10000000)
     {
 
         $pid = $_POST["pid"];
@@ -206,19 +265,83 @@ function ierg4210_prod_edit()
         $price = $_POST["price"];
         $desc = $_POST["description"];
         $inv = $_POST["inventory"];
-        $sql = "UPDATE products SET catid= ? , name= ?, price= ?, description = ?, inventory = ? WHERE pid = ?";
+        $filename = $name . ".jpg";
+        $sql = "UPDATE products SET catid= ? , name= ?, price= ?, description = ?, inventory = ?, filename = ? WHERE pid = ?";
         $q = $db->prepare($sql);
         $q->bindParam(1, $catid);
         $q->bindParam(2, $name);
         $q->bindParam(3, $price);
         $q->bindParam(4, $desc);
         $q->bindParam(5, $inv);
-        $q->bindParam(6, $pid);
+        $q->bindParam(6, $filename);
+        $q->bindParam(7, $pid);
         $q->execute();
-        $lastId = $db->lastInsertId();
+        //$lastId = $db->lastInsertId();
 
         // Note: Take care of the permission of destination folder (hints: current user is apache)
-        if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $pid . ".jpg"))
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".jpg"))
+        {
+            // redirect back to original page; you may comment it during debug
+            header('Location: admin.php');
+            exit();
+        }
+    }
+    
+    if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/png" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/jpeg" && $_FILES["file"]["size"] < 10000000)
+    {
+
+        $pid = $_POST["pid"];
+        $catid = $_POST["catid"];
+        $name = $_POST["name"];
+        $price = $_POST["price"];
+        $desc = $_POST["description"];
+        $inv = $_POST["inventory"];
+        $filename = $name . ".png";
+        $sql = "UPDATE products SET catid= ? , name= ?, price= ?, description = ?, inventory = ?, filename = ? WHERE pid = ?";
+        $q = $db->prepare($sql);
+        $q->bindParam(1, $catid);
+        $q->bindParam(2, $name);
+        $q->bindParam(3, $price);
+        $q->bindParam(4, $desc);
+        $q->bindParam(5, $inv);
+        $q->bindParam(6, $filename);
+        $q->bindParam(7, $pid);
+        $q->execute();
+        //$lastId = $db->lastInsertId();
+
+        // Note: Take care of the permission of destination folder (hints: current user is apache)
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".png"))
+        {
+            // redirect back to original page; you may comment it during debug
+            header('Location: admin.php');
+            exit();
+        }
+    }
+    
+    if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/gif" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/jpeg" && $_FILES["file"]["size"] < 10000000)
+    {
+
+        $pid = $_POST["pid"];
+        $catid = $_POST["catid"];
+        $name = $_POST["name"];
+        $price = $_POST["price"];
+        $desc = $_POST["description"];
+        $inv = $_POST["inventory"];
+        $filename = $name . ".gif";
+        $sql = "UPDATE products SET catid= ? , name= ?, price= ?, description = ?, inventory = ?, filename = ? WHERE pid = ?";
+        $q = $db->prepare($sql);
+        $q->bindParam(1, $catid);
+        $q->bindParam(2, $name);
+        $q->bindParam(3, $price);
+        $q->bindParam(4, $desc);
+        $q->bindParam(5, $inv);
+        $q->bindParam(6, $filename);
+        $q->bindParam(7, $pid);
+        $q->execute();
+        //$lastId = $db->lastInsertId();
+
+        // Note: Take care of the permission of destination folder (hints: current user is apache)
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".gif"))
         {
             // redirect back to original page; you may comment it during debug
             header('Location: admin.php');

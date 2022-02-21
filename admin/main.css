@@ -1,3 +1,19 @@
 html { overflow-x: hidden;}
 body { padding-top: 55px;}
 a { all: unset;}
+
+.image {
+    position:relative !important;
+    overflow:hidden !important;
+    padding-bottom:100% !important;
+    border-style: groove;
+}
+
+.thumbnail{
+    position:absolute !important;
+    max-width: 100% !important;
+      max-height: 100% !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translateX(-50%) translateY(-50%) !important;
+}

@@ -1,4 +1,4 @@
-var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="popover"]'));
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     const popoverId = popoverTriggerEl.attributes['data-content-id'];
     if (popoverId) {

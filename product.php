@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="./bootstrap.min.css" crossorigin="anonymous">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" crossorigin="anonymous">
-      <link rel="stylesheet" href="./main.css">
+      <link rel="stylesheet" href="./product.css">
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <title>IERG4210 Phase 2B</title>
@@ -96,7 +96,7 @@ echo	'<a class="nav-link" href="./category.php?catid=' . $product[0]["CATID"] . 
 			echo		'<span class="small p-2">'.$product[0]["INVENTORY"].' item(s) left</span>';
 			echo	'</div>
 				<div class="col-8">
-					<img class="image img-fluid rounded" src="./admin/lib/images/'.$product[0]["PID"].'.jpg" alt="Card image cap">
+					<img class="image img-fluid rounded" src="./admin/lib/images/'.$product[0]["FILENAME"].'" alt="Card image cap">
 				</div>';
 ?>
 			</div>

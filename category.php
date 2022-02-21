@@ -113,21 +113,21 @@ $catname = ierg4210_cat_fetchOne($_GET["catid"]);
                      <div class="row">
                         <?php
                            foreach ($res2 as $prod){
-                           	if ($_GET["catid"] == $prod["CATID"]) {
-                           		echo '<div class="col-md-6 col-lg-4 col-xl-3">';
-                           		echo '<div class="card mb-4 box-shadow">';
-                       	   		echo '<a href="product.php?pid='.$prod["PID"].' " >';
-                                	echo '<img class="card-img-top" src="../admin/lib/images/' . $prod["PID"] . '.jpg">';
-                                	echo '</a>';
-                                	echo '<div class="card-body">';
-                           		echo '<a class="card-text" href="product.php?pid='.$prod["PID"].' " >$' . $prod["PRICE"] .' '.$prod["NAME"] . '</a>';
-                        		echo '<div class="btn-group">';
-                        		echo '<a class="btn btn-sm btn-outline-secondary" href="product.php?pid='.$prod["PID"].' " >View</a>';
-                           		echo '<button type="button" class="btn btn-sm btn-outline-secondary">Add to cart</button>';
-                           		echo '</div>';
-                           		echo '</div></div></div>';
-                           	}
-			   }
+                           if ($_GET["catid"] == $prod["CATID"]) {
+                                 echo '<div class="col-md-6 col-lg-4 col-xl-3">';
+                           	echo '<div class="card mb-4 box-shadow">';
+                           	echo '<a href="product.php?pid='.$prod["PID"].' " >';
+                           echo '<div class="image"><img id="thumbnail" class="card-img-top" src="../admin/lib/images/' . $prod["FILENAME"] . '"></div>';
+                           echo '</a>';
+                           echo '<div class="card-body">';
+                           echo '<a class="card-text mr-3" href="product.php?pid='.$prod["PID"].' " >$' . $prod["PRICE"] .' '.$prod["NAME"] . '</a>';
+                           echo '<div class="btn-group">';
+                           echo '<a class="btn btn-sm btn-outline-secondary" href="product.php?pid='.$prod["PID"].' " >View</a>';
+                           echo '<button type="button" class="btn btn-sm btn-outline-secondary">Add to cart</button>';
+                           echo '</div>';
+                           echo '</div></div></div>';
+                           }
+                           }
                            ?>
                      </div>
                   </div>

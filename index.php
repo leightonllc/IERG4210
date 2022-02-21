@@ -60,9 +60,8 @@
       </nav>
       <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
          <div class="col-md-6 p-lg-6 mx-auto my-5">
-            <h1 class="display-4">XXXStore CNY Sale!</h1>
-            <p class="lead">Sed tempor libero vitae placerat interdum. Donec faucibus, est id tincidunt egestas, urna nisl semper dui, ut tincidunt risus enim sit amet dolor. Nullam accumsan a ex non convallis. Vestibulum tempus luctus lacus eget vestibulum. Proin dapibus sapien et semper varius. Donec tristique eleifend quam, in pulvinar diam mattis sed. Aenean porta iaculis augue, eu venenatis sem tincidunt eu.</p>
-            <a class="btn btn-outline-secondary" href="#">Get one</a>
+            <h1 class="display-4">IERG4210 Store Sale</h1>
+            <p class="lead">Welcome to IERG4210 Store! You can find all sorts of newest gadgets, including phones and tablets here. Feel free to navigate!</p>
          </div>
          <div class="product-device box-shadow d-none d-md-block"></div>
          <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
@@ -106,10 +105,10 @@
                                  echo '<div class="col-md-6 col-lg-4 col-xl-3">';
                            	echo '<div class="card mb-4 box-shadow">';
                            	echo '<a href="product.php?pid='.$prod["PID"].' " >';
-                           echo '<img class="card-img-top" src="../admin/lib/images/' . $prod["PID"] . '.jpg">';
+                           echo '<div class="image"><img id="thumbnail" class="card-img-top" src="../admin/lib/images/' . $prod["FILENAME"] . '"></div>';
                            echo '</a>';
                            echo '<div class="card-body">';
-                           echo '<a class="card-text" href="product.php?pid='.$prod["PID"].' " >$' . $prod["PRICE"] .' '.$prod["NAME"] . '</a>';
+                           echo '<a class="card-text mr-3" href="product.php?pid='.$prod["PID"].' " >$' . $prod["PRICE"] .' '.$prod["NAME"] . '</a>';
                            echo '<div class="btn-group">';
                            echo '<a class="btn btn-sm btn-outline-secondary" href="product.php?pid='.$prod["PID"].' " >View</a>';
                            echo '<button type="button" class="btn btn-sm btn-outline-secondary">Add to cart</button>';
