@@ -1,6 +1,6 @@
 <?php
    session_start();
-?>
+   ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +8,9 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="./bootstrap.min.css" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-dark-5@1.1.3/dist/css/bootstrap-dark.min.css"
+      media="(prefers-color-scheme: dark)" crossorigin="anonymous">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
       crossorigin="anonymous">
    <link rel="stylesheet" href="./main.css">
@@ -16,11 +18,12 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
    </script>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <link rel="icon" type="image/x-icon" href="https://img.icons8.com/material-outlined/24/000000/pixel-cat.png">
    <title>IERG4210 Phase 2B</title>
 </head>
 
 <body>
-   <nav aria-label="Top bar" class="fixed-top navbar navbar-expand-lg navbar-light bg-light">
+   <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
          <a class="navbar-brand" href="./index.php">IERG4210 Store</a>
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -32,44 +35,42 @@
                <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="./index.php">Home</a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-               </li>
                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                  <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
                      data-bs-toggle="dropdown" aria-expanded="false">
-                     Dropdown
+                     Categories
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                     <li><a class="dropdown-item" href="#">Action</a></li>
-                     <li><a class="dropdown-item" href="#">Another action</a></li>
-                     <li>
-                        <hr class="dropdown-divider">
-                     </li>
-                     <li><a class="dropdown-item" href="#">Something else here</a></li>
+                     <?php
+                         require __DIR__.'/admin/lib/db.inc.php';
+                           $res = ierg4210_cat_fetchall();
+                           $res2 = ierg4210_prod_fetchall();
+                           foreach ($res as $cat){
+                           echo '<li>';
+                           echo '<a class="dropdown-item" href="category.php?catid=' . $cat["CATID"] . '">' . $cat["NAME"] . '</a>';
+                           echo '</li>';
+                     
+                       }
+                       ?>
                   </ul>
                </li>
                <li class="nav-item">
-                  <a tabindex="0" class="nav-link d-none d-lg-block" href="#" data-bs-toggle="popover"
+                  <a tabindex="0" class="nav-link active d-none d-lg-block" href="#" data-bs-toggle="popover"
                      data-bs-trigger="hover" type="button" data-bs-placement="bottom" data-bs-html="true"
                      data-content-id="shoppingcart">Shopping Cart <i class="bi bi-cart"></i></a>
                   <a tabindex="0" class="nav-link d-lg-none" href="#">Shopping Cart <i class="bi bi-cart"></i></a>
                </li>
             </ul>
-            <form class="form-inline d-lg-none">
-               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-               <button class="btn btn-outline-success" type="submit">Search</button>
+            <form class="d-flex">
+               <input class="form-control me-sm-2 d-none d-lg-block" type="text" placeholder="Search">
+               <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
             </form>
          </div>
-         <form class="form-inline d-none d-lg-block">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-         </form>
       </div>
    </nav>
    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
       <div class="col-md-6 p-lg-6 mx-auto my-5">
-         <h1 class="display-4">IERG4210 Store Sale</h1>
+         <p class="display-4">IERG4210 Store Sale</p>
          <p class="lead">Welcome to IERG4210 Store! You can find all sorts of newest gadgets, including phones and
             tablets here. Feel free to navigate!</p>
       </div>
@@ -77,57 +78,51 @@
       <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
    </div>
    <div class="container">
-      <div class="row d-none d-sm-block">
-         <nav aria-label="breadcrumb" class="navbar navbar-light navbar-expand-sm p-3">
-            <span class="navbar-brand">You are now at:</span>
-            <ul class="navbar-nav mr-auto">
-               <li class="nav-item">
-                  <a class="nav-link" href="./index.php">Home</a>
-               </li>
-            </ul>
+      <div class="row">
+         <nav class="navbar navbar-light p-3 d-flex justify-content-start">
+            <div><span class="navbar-brand">You are now at:</span></div>
+            <div><a class="nav-link" href="./index.php">Home</a></div>
          </nav>
       </div>
    </div>
-
-   <div class="container">
+   <!-- I did not use the standard bootstrap breadcrumb here as it does not look good.-->
+   <div class="container mb-5">
       <div class="row">
-         <div class="d-none d-lg-block col-lg-2">
-            <ul class="nav flex-column">
-            <?php
-               require __DIR__ . '/admin/lib/db.inc.php';
-               $res = ierg4210_cat_fetchall();
-               $res2 = ierg4210_prod_fetchall();
-               foreach ($res as $cat)
-               {
-                  echo '<li class="nav-item">';
-                  echo '<a class="nav-link" href="category.php?catid=' . $cat["CATID"] . '">' . $cat["NAME"] . '</a>';
-                  echo '</li>';
-               }
-            ?>
-
+         <div class="d-none d-md-block col-md-2 navbar navbar-light">
+            <ul class="navbar-nav flex-column">
+               <li class="nav-item mb-2">
+                  <a class="navbar-brand">Categories:</a>
+               </li>
+               <?php
+                     foreach ($res as $cat){
+                     echo '<li class="nav-item">';
+                     echo '<a class="nav-link active" href="category.php?catid=' . $cat["CATID"] . '">' . $cat["NAME"] . '</a>';
+                     echo '</li>';
+                     
+                     }
+                     ?>
             </ul>
          </div>
-         <div class="col-lg-10">
-            <div class="album py-5 bg-light">
+         <div class="col-md-10">
+            <div class="album py-3">
                <div class="container">
                   <div class="row">
-                  <?php
-                  foreach ($res2 as $prod)
-                  {
-                     echo '<div class="col-md-6 col-lg-4 col-xl-3">';
-                     echo '<div class="card mb-4 box-shadow">';
-                     echo '<a href="product.php?pid=' . $prod["PID"] . ' " >';
-                     echo '<div class="image"><img id="thumbnail" class="card-img-top" src="../admin/lib/images/' . $prod["FILENAME"] . '"></div>';
-                     echo '</a>';
-                     echo '<div class="card-body">';
-                     echo '<a class="card-text mr-3" href="product.php?pid=' . $prod["PID"] . ' " >$' . $prod["PRICE"] . ' ' . $prod["NAME"] . '</a>';
-                     echo '<div class="btn-group">';
-                     echo '<a class="btn btn-sm btn-outline-secondary" href="product.php?pid=' . $prod["PID"] . ' " >View</a>';
-                     echo '<button type="button" class="btn btn-sm btn-outline-secondary">Add to cart</button>';
-                     echo '</div>';
-                     echo '</div></div></div>';
-                  }
-                  ?>
+                     <?php
+                           foreach ($res2 as $prod){
+                                 echo '<div class="col-md-6 col-lg-4 col-xl-3 row-eq-height">';
+                           	echo '<div class="card mb-4 box-shadow">';
+                           	echo '<a href="product.php?pid='.$prod["PID"].' " >';
+                           echo '<div class="image"><img id="thumbnail" class="card-img-top" src="../admin/lib/images/' . $prod["FILENAME"] . '"></div>';
+                           echo '</a>';
+                           echo '<div class="card-body d-flex align-items-end flex-column">';
+                           echo '<a class="card-text me-auto" href="product.php?pid='.$prod["PID"].' " >$' . $prod["PRICE"] .' '.$prod["NAME"] . '</a>';
+                           echo '<div class="btn-group mt-auto me-auto py-2">';
+                           echo '<a class="btn btn-sm btn-secondary" href="product.php?pid='.$prod["PID"].' " >View</a>';
+                           echo '<button type="button" class="btn btn-sm btn-secondary">Add to cart</button>';
+                           echo '</div>';
+                           echo '</div></div></div>';
+                           }
+                           ?>
                   </div>
                </div>
             </div>
@@ -135,7 +130,7 @@
       </div>
    </div>
    <div class="d-none" id="shoppingcart">
-      <table class="table">
+      <table class="table table-borderless">
          <thead>
             <tr>
                <th scope="col">#</th>
@@ -147,20 +142,20 @@
          <tbody>
             <tr>
                <th scope="row">1</th>
-               <td>Product 1</td>
-               <td><input type="number" value="1"></td>
+               <td>Product 1 Lengthy Tex</td>
+               <td><input type="number" value="1" min="0" max="99"></td>
                <td>$12.4</td>
             </tr>
             <tr>
                <th scope="row">2</th>
                <td>Product 2</td>
-               <td><input type="number" value="1"></td>
+               <td><input type="number" value="1" min="0" max="99"></td>
                <td>$15.6</td>
             </tr>
             <tr>
                <th scope="row">3</th>
                <td>Product 3</td>
-               <td><input type="number" value="1"></td>
+               <td><input type="number" value="1" min="0" max="99"></td>
                <td>$17.4</td>
             </tr>
          </tbody>
@@ -175,6 +170,17 @@
       </table>
    </div>
 </body>
+<footer class="static-bottom mt-5 text-muted bg-light container-fluid">
+   <div class="container py-3 d-flex align-items-start">
+      <div>
+         <p>SID: 1155127347 Name: Lau Long Ching</p>
+      </div>
+      <div class="ms-auto">
+         <a href="#">Back to top</a>
+      </div>
+
+   </div>
+</footer>
 <script src="./popover.js"></script>
 <!--- Bootstrap Popover Function, enabled with JQuery for the on-hover shopping cart window. --->
 

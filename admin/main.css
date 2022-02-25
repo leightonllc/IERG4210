@@ -2,18 +2,11 @@ html { overflow-x: hidden;}
 body { padding-top: 55px;}
 a { all: unset;}
 
-.image {
-    position:relative !important;
-    overflow:hidden !important;
-    padding-bottom:100% !important;
-    border-style: groove;
+.table {max-width: 300px !important;
+transform:scale(0.9);
+transform: translate(-11px,0px);
 }
 
-.thumbnail{
-    position:absolute !important;
-    max-width: 100% !important;
-      max-height: 100% !important;
-      top: 50% !important;
-      left: 50% !important;
-      transform: translateX(-50%) translateY(-50%) !important;
+@media (prefers-color-scheme: dark) {
+  .bg-light   { background-color: #405c7c !important;}
 }

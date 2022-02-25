@@ -5,7 +5,9 @@
 📚 Name: Lau Long Ching </br>
 🗂️ SID: 1155127347
 
-Please refer to https://github.com/leightonllc/IERG4210 for the git record.
+Please click [here](https://gitfront.io/r/user-8114797/65077c3319b004230f7409482306b50059e13d64/IERG4210/) for the GitHub page.
+
+Please visit [http://3.13.126.10](http://3.13.126.10) or [http://s1155127347.ierg4210.ie.cuhk.edu.hk](http://s1155127347.ierg4210.ie.cuhk.edu.hk) to mark my assignment, thank you!
 
 ## Phase 2A marking checklist
 1. Instantiate a free Virtual Cloud Machine (Amazon EC2 recommended or other free VPS). <img src="https://img.shields.io/badge/-complete-green" align="right" /></br>
@@ -15,8 +17,9 @@ Please refer to https://github.com/leightonllc/IERG4210 for the git record.
 2. Apply necessary security configurations. <img src="https://img.shields.io/badge/-complete-green" align="right" />
 
 - Apply proper firewall settings to your VM: block all ports except 22, 80 and 443 only <img src="https://img.shields.io/badge/-complete-green" align="right" /></br>
-
+<p align="center">
 <img src="./assignment/2.png" align="center" /></br>
+</p>
 - Apply proper updates for the server software packages in a regular manner <img src="https://img.shields.io/badge/-complete-green" align="right" />
 - Hide the versions of OS, Apache, and PHP in HTTP response headers <img src="https://img.shields.io/badge/-complete-green" align="right" /></br>
 <p align="center">
@@ -51,7 +54,7 @@ Please refer to https://github.com/leightonllc/IERG4210 for the git record.
   - Data: at least 2 products for each category
 
 
-2.  HTML, PHP & SQL: Create an admin panel http://3.13.126.10/admin/admin.php <img src="https://img.shields.io/badge/-complete-green" align="right" /></br>
+2.  HTML, PHP & SQL: Create an admin panel [http://3.13.126.10/admin/admin.php](http://3.13.126.10/admin/admin.php) <img src="https://img.shields.io/badge/-complete-green" align="right" /></br>
 <p align="center">
 <img src="./assignment/6.png" align="center" /></br></p>
 

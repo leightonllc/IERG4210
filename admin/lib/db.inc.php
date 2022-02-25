@@ -1,4 +1,5 @@
 <?php
+
 function ierg4210_DB()
 {
     // connect to the database
@@ -41,8 +42,11 @@ function ierg4210_prod_insert()
     // TODO: complete the rest of the INSERT command
     if (!preg_match('/^\d*$/', $_POST['catid'])) throw new Exception("invalid-catid");
     $_POST['catid'] = (int)$_POST['catid'];
-    if (!preg_match('/^[\w\- ]+$/', $_POST['name'])) throw new Exception("invalid-name");
-    if (!preg_match('/^[\d\.]+$/', $_POST['price'])) throw new Exception("invalid-price");
+    if (!preg_match('/^[\w\- ()]+$/', $_POST['name'])) throw new Exception("invalid-name");
+    if (!preg_match('/^\d*$/', $_POST['price'])) throw new Exception("invalid-price");
+    $_POST['price'] = (float)$_POST['price'];
+    if (!preg_match('/^\d*$/', $_POST['inventory'])) throw new Exception("invalid-inventory");
+    $_POST['inventory'] = (int)$_POST['inventory'];
 
     $sql = "INSERT INTO products (catid, name, price, description, inventory) VALUES (?, ?, ?, ?, ?)";
     $q = $db->prepare($sql);
@@ -66,6 +70,7 @@ function ierg4210_prod_insert()
         $q->bindParam(6, $filename);
         $q->execute();
         //$lastId = $db->lastInsertId();
+
         // Note: Take care of the permission of destination folder (hints: current user is apache)
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".jpg"))
         {
@@ -74,7 +79,7 @@ function ierg4210_prod_insert()
             exit();
         }
     }
-
+    
     if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/png" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/png" && $_FILES["file"]["size"] < 10000000)
     {
 
@@ -94,6 +99,7 @@ function ierg4210_prod_insert()
         $q->bindParam(6, $filename);
         $q->execute();
         //$lastId = $db->lastInsertId();
+
         // Note: Take care of the permission of destination folder (hints: current user is apache)
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".png"))
         {
@@ -102,7 +108,7 @@ function ierg4210_prod_insert()
             exit();
         }
     }
-
+    
     if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/gif" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/png" && $_FILES["file"]["size"] < 10000000)
     {
 
@@ -122,6 +128,7 @@ function ierg4210_prod_insert()
         $q->bindParam(6, $filename);
         $q->execute();
         //$lastId = $db->lastInsertId();
+
         // Note: Take care of the permission of destination folder (hints: current user is apache)
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".gif"))
         {
@@ -161,8 +168,8 @@ function ierg4210_cat_edit()
     $q->bindParam(1, $name, PDO::PARAM_STR);
     $q->bindParam(2, $catid, PDO::PARAM_INT);
     $q->execute(array(
-        $catid,
-        $name
+        $name,
+        $catid
     ));
     header('Location: admin.php');
     exit();
@@ -209,30 +216,29 @@ function ierg4210_prod_fetchAll()
     }
 }
 
-function ierg4210_prod_fetchOne($pid)
-{
+function ierg4210_prod_fetchOne($pid){
     global $db;
     $db = ierg4210_DB();
     $q = $db->prepare("SELECT * FROM products WHERE pid = ?");
-    $q->bindParam(1, $pid, PDO::PARAM_INT);
+    $q -> bindParam(1, $pid, PDO::PARAM_INT);
     if ($q->execute())
     {
         return $q->fetchAll();
     }
-
+ 
 }
 
-function ierg4210_cat_fetchOne($catid)
-{
+
+function ierg4210_cat_fetchOne($catid){
     global $db;
     $db = ierg4210_DB();
     $q = $db->prepare("SELECT * FROM categories WHERE catid = ?");
-    $q->bindParam(1, $catid, PDO::PARAM_INT);
+    $q -> bindParam(1, $catid, PDO::PARAM_INT);
     if ($q->execute())
     {
         return $q->fetchAll();
     }
-
+ 
 }
 
 function ierg4210_prod_edit()
@@ -245,9 +251,11 @@ function ierg4210_prod_edit()
     // TODO: complete the rest of the INSERT command
     if (!preg_match('/^\d*$/', $_POST['catid'])) throw new Exception("invalid-catid");
     $_POST['catid'] = (int)$_POST['catid'];
-    if (!preg_match('/^[\w\- ]+$/', $_POST['name'])) throw new Exception("invalid-name");
-    if (!preg_match('/^[\d\.]+$/', $_POST['price'])) throw new Exception("invalid-price");
-    if (!preg_match('/^[\d\.]+$/', $_POST['inventory'])) throw new Exception("invalid-inventory");
+    if (!preg_match('/^[\w\- ()]+$/', $_POST['name'])) throw new Exception("invalid-name");
+    if (!preg_match('/^\d*$/', $_POST['price'])) throw new Exception("invalid-price");
+    $_POST['price'] = (float)$_POST['price'];
+    if (!preg_match('/^\d*$/', $_POST['inventory'])) throw new Exception("invalid-inventory");
+    $_POST['inventory'] = (int)$_POST['inventory'];
 
     $sql = "UPDATE products SET catid= ? , name= ?, price= ?, description = ?, inventory = ? WHERE pid = ?";
     $q = $db->prepare($sql);
@@ -274,6 +282,7 @@ function ierg4210_prod_edit()
         $q->bindParam(7, $pid);
         $q->execute();
         //$lastId = $db->lastInsertId();
+
         // Note: Take care of the permission of destination folder (hints: current user is apache)
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".jpg"))
         {
@@ -282,7 +291,7 @@ function ierg4210_prod_edit()
             exit();
         }
     }
-
+    
     if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/png" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/jpeg" && $_FILES["file"]["size"] < 10000000)
     {
 
@@ -304,6 +313,7 @@ function ierg4210_prod_edit()
         $q->bindParam(7, $pid);
         $q->execute();
         //$lastId = $db->lastInsertId();
+
         // Note: Take care of the permission of destination folder (hints: current user is apache)
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".png"))
         {
@@ -312,7 +322,7 @@ function ierg4210_prod_edit()
             exit();
         }
     }
-
+    
     if ($_FILES["file"]["error"] == 0 && $_FILES["file"]["type"] == "image/gif" && mime_content_type($_FILES["file"]["tmp_name"]) == "image/jpeg" && $_FILES["file"]["size"] < 10000000)
     {
 
@@ -334,6 +344,7 @@ function ierg4210_prod_edit()
         $q->bindParam(7, $pid);
         $q->execute();
         //$lastId = $db->lastInsertId();
+
         // Note: Take care of the permission of destination folder (hints: current user is apache)
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".gif"))
         {
