@@ -2,7 +2,7 @@ var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggl
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     const popoverId = popoverTriggerEl.attributes['data-content-id'];
     if (popoverId) {
-        const contentEl=$(`#${popoverId.value}`).html();
+        var contentEl=$(`#${popoverId.value}`).html();
         return new bootstrap.Popover(popoverTriggerEl, {
             content: contentEl,
             html: true,
