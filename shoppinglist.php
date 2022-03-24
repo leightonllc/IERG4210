@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 echo '
          <table class="table table-borderless">
@@ -7,5 +6,6 @@ echo '
          <tbody id="shoppingcarttable"></tbody>
          <tfoot id="shoppingcartfoot"></tfoot>
          </table>
+         <script src="https://cdn.jsdelivr.net/gh/jitbit/HtmlSanitizer@master/HtmlSanitizer.js"></script>
       <script src="../lib/shoppinglist.js"></script>';
 ?>

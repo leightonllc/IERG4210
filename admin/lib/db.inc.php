@@ -1,5 +1,8 @@
 <?php
 
+include_once $_SERVER['DOCUMENT_ROOT'] .'/lib/csrf.php';
+
+
 function ierg4210_DB()
 {
     // connect to the database
@@ -30,12 +33,9 @@ function ierg4210_cat_fetchall()
     if ($q->execute()) return $q->fetchAll();
 }
 
-// Since this form will take file upload, we use the tranditional (simpler) rather than AJAX form submission.
-// Therefore, after handling the request (DB insert and file copy), this function then redirects back to admin.html
 function ierg4210_prod_insert()
 {
-    // input validation or sanitization
-    // DB manipulation
+
     global $db;
     $db = ierg4210_DB();
 
@@ -43,7 +43,7 @@ function ierg4210_prod_insert()
     if (!preg_match('/^\d*$/', $_POST['catid'])) throw new Exception("invalid-catid");
     $_POST['catid'] = (int)$_POST['catid'];
     if (!preg_match('/^[\w\- ()]+$/', $_POST['name'])) throw new Exception("invalid-name");
-    if (!preg_match('/^\d*$/', $_POST['price'])) throw new Exception("invalid-price");
+    if (!preg_match('/^\d+.?\d{0,}$/', $_POST['price'])) throw new Exception("invalid-price");
     $_POST['price'] = (float)$_POST['price'];
     if (!preg_match('/^\d*$/', $_POST['inventory'])) throw new Exception("invalid-inventory");
     $_POST['inventory'] = (int)$_POST['inventory'];
@@ -55,9 +55,9 @@ function ierg4210_prod_insert()
     {
 
         $catid = $_POST["catid"];
-        $name = $_POST["name"];
+        $name = htmlspecialchars($_POST["name"]);
         $price = $_POST["price"];
-        $desc = $_POST["description"];
+        $desc = htmlspecialchars($_POST["description"]);
         $inv = $_POST["inventory"];
         $filename = $name . ".jpg";
         $sql = "INSERT INTO products (catid, name, price, description, inventory, filename) VALUES (?, ?, ?, ?, ?, ?);";
@@ -75,7 +75,7 @@ function ierg4210_prod_insert()
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".jpg"))
         {
             // redirect back to original page; you may comment it during debug
-            header('Location: admin.php');
+            header('Location: ../admin.php');
             exit();
         }
     }
@@ -84,9 +84,9 @@ function ierg4210_prod_insert()
     {
 
         $catid = $_POST["catid"];
-        $name = $_POST["name"];
+        $name = htmlspecialchars($_POST["name"]);
         $price = $_POST["price"];
-        $desc = $_POST["description"];
+        $desc = htmlspecialchars($_POST["description"]);
         $inv = $_POST["inventory"];
         $filename = $name . ".png";
         $sql = "INSERT INTO products (catid, name, price, description, inventory, filename) VALUES (?, ?, ?, ?, ?, ?);";
@@ -104,7 +104,7 @@ function ierg4210_prod_insert()
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".png"))
         {
             // redirect back to original page; you may comment it during debug
-            header('Location: admin.php');
+            header('Location: ../admin.php');
             exit();
         }
     }
@@ -113,9 +113,9 @@ function ierg4210_prod_insert()
     {
 
         $catid = $_POST["catid"];
-        $name = $_POST["name"];
+        $name = htmlspecialchars($_POST["name"]);
         $price = $_POST["price"];
-        $desc = $_POST["description"];
+        $desc = htmlspecialchars($_POST["description"]);
         $inv = $_POST["inventory"];
         $filename = $name . ".gif";
         $sql = "INSERT INTO products (catid, name, price, description, inventory, filename) VALUES (?, ?, ?, ?, ?, ?);";
@@ -133,7 +133,7 @@ function ierg4210_prod_insert()
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".gif"))
         {
             // redirect back to original page; you may comment it during debug
-            header('Location: admin.php');
+            header('Location: ../admin.php');
             exit();
         }
     }
@@ -150,11 +150,11 @@ function ierg4210_cat_insert()
 {
     global $db;
     $db = ierg4210_DB();
-    $name = $_POST['name'];
+    $name = htmlspecialchars($_POST['name']);
     $q = $db->prepare('INSERT INTO categories (name) VALUES (?)');
     $q->bindParam(1, $name, PDO::PARAM_STR);
     $q->execute();
-    header('Location: admin.php');
+    header('Location: ../admin.php');
     exit();
 }
 
@@ -163,7 +163,7 @@ function ierg4210_cat_edit()
     global $db;
     $db = ierg4210_DB();
     $catid = $_POST['catid'];
-    $name = $_POST['name'];
+    $name = htmlspecialchars($_POST['name']);
     $q = $db->prepare('UPDATE categories SET name = ? WHERE catid = ?;');
     $q->bindParam(1, $name, PDO::PARAM_STR);
     $q->bindParam(2, $catid, PDO::PARAM_INT);
@@ -171,7 +171,7 @@ function ierg4210_cat_edit()
         $name,
         $catid
     ));
-    header('Location: admin.php');
+    header('Location: ../admin.php');
     exit();
 }
 
@@ -180,13 +180,13 @@ function ierg4210_cat_delete()
     global $db;
     $db = ierg4210_DB();
     $catid = $_POST["catid"];
-    $name = $_POST["name"];
+    $name = htmlspecialchars($_POST["name"]);
     $q = $db->prepare('DELETE FROM categories WHERE catid = $catid');
     $q->bindParam(1, $catid, PDO::PARAM_INT);
     $q->execute(array(
         $catid
     ));
-    header('Location: admin.php');
+    header('Location: ../admin.php');
     exit();
 }
 
@@ -195,13 +195,13 @@ function ierg4210_prod_delete_by_catid()
     global $db;
     $db = ierg4210_DB();
     $catid = $_POST["catid"];
-    $name = $_POST["name"];
+    $name = htmlspecialchars($_POST["name"]);
     $q = $db->prepare('DELETE FROM products WHERE catid = $catid');
     $q->bindParam(1, $catid, PDO::PARAM_INT);
     $q->execute(array(
         $catid
     ));
-    header('Location: admin.php');
+    header('Location: ../admin.php');
     exit();
 }
 
@@ -252,7 +252,7 @@ function ierg4210_prod_edit()
     if (!preg_match('/^\d*$/', $_POST['catid'])) throw new Exception("invalid-catid");
     $_POST['catid'] = (int)$_POST['catid'];
     if (!preg_match('/^[\w\- ()]+$/', $_POST['name'])) throw new Exception("invalid-name");
-    if (!preg_match('/^\d*$/', $_POST['price'])) throw new Exception("invalid-price");
+    if (!preg_match('/^\d+.?\d{0,}$/', $_POST['price'])) throw new Exception("invalid-price");
     $_POST['price'] = (float)$_POST['price'];
     if (!preg_match('/^\d*$/', $_POST['inventory'])) throw new Exception("invalid-inventory");
     $_POST['inventory'] = (int)$_POST['inventory'];
@@ -266,9 +266,9 @@ function ierg4210_prod_edit()
 
         $pid = $_POST["pid"];
         $catid = $_POST["catid"];
-        $name = $_POST["name"];
+        $name = htmlspecialchars($_POST["name"]);
         $price = $_POST["price"];
-        $desc = $_POST["description"];
+        $desc = htmlspecialchars($_POST["description"]);
         $inv = $_POST["inventory"];
         $filename = $name . ".jpg";
         $sql = "UPDATE products SET catid= ? , name= ?, price= ?, description = ?, inventory = ?, filename = ? WHERE pid = ?";
@@ -287,7 +287,7 @@ function ierg4210_prod_edit()
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".jpg"))
         {
             // redirect back to original page; you may comment it during debug
-            header('Location: admin.php');
+            header('Location: ../admin.php');
             exit();
         }
     }
@@ -297,9 +297,9 @@ function ierg4210_prod_edit()
 
         $pid = $_POST["pid"];
         $catid = $_POST["catid"];
-        $name = $_POST["name"];
+        $name = htmlspecialchars($_POST["name"]);
         $price = $_POST["price"];
-        $desc = $_POST["description"];
+        $desc = htmlspecialchars($_POST["description"]);
         $inv = $_POST["inventory"];
         $filename = $name . ".png";
         $sql = "UPDATE products SET catid= ? , name= ?, price= ?, description = ?, inventory = ?, filename = ? WHERE pid = ?";
@@ -318,7 +318,7 @@ function ierg4210_prod_edit()
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".png"))
         {
             // redirect back to original page; you may comment it during debug
-            header('Location: admin.php');
+            header('Location: ../admin.php');
             exit();
         }
     }
@@ -328,9 +328,9 @@ function ierg4210_prod_edit()
 
         $pid = $_POST["pid"];
         $catid = $_POST["catid"];
-        $name = $_POST["name"];
+        $name = htmlspecialchars($_POST["name"]);
         $price = $_POST["price"];
-        $desc = $_POST["description"];
+        $desc = htmlspecialchars($_POST["description"]);
         $inv = $_POST["inventory"];
         $filename = $name . ".gif";
         $sql = "UPDATE products SET catid= ? , name= ?, price= ?, description = ?, inventory = ?, filename = ? WHERE pid = ?";
@@ -349,7 +349,7 @@ function ierg4210_prod_edit()
         if (move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/lib/images/" . $name . ".gif"))
         {
             // redirect back to original page; you may comment it during debug
-            header('Location: admin.php');
+            header('Location: ../admin.php');
             exit();
         }
     }
@@ -366,13 +366,12 @@ function ierg4210_prod_delete()
     global $db;
     $db = ierg4210_DB();
     $pid = $_POST["pid"];
-    $name = $_POST["name"];
+    $name = htmlspecialchars($_POST["name"]);
     $q = $db->prepare('DELETE FROM products WHERE pid = $pid');
     $q->bindParam(1, $pid, PDO::PARAM_INT);
     $q->execute(array(
         $pid
     ));
-    header('Location: admin.php');
+    header('Location: ../admin.php');
     exit();
 }
-

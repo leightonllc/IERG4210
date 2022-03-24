@@ -1,29 +1,36 @@
-html { overflow-x: hidden; }
-body { padding-top: 55px; }
-a { all: unset;}
-
-.image {
-    position:relative !important;
-    overflow:hidden !important;
-
+html {
+  overflow-x: hidden;
 }
 
+body {
+  padding-top: 55px;
+}
 
+a {
+  all: unset;
+}
 
+.image {
+  position: relative !important;
+  overflow: hidden !important;
+
+}
 
 .row-eq-height {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
-  display:         flex;
+  display: flex;
 }
 
-.table {max-width: 300px !important;
-transform:scale(0.9);
-transform: translate(-11px,0px);
+.table {
+  max-width: 300px !important;
+  transform: scale(0.9);
+  transform: translate(-11px, 0px);
 }
 
 @media (prefers-color-scheme: dark) {
-  .bg-light   { background-color: #405c7c !important;}
+  .bg-light {
+    background-color: #405c7c !important;
+  }
 }
-

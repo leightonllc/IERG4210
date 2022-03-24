@@ -1,16 +1,6 @@
 <?php
-
-session_start();
-
-include_once('lib/db.inc.php');
-include_once('../lib/auth.php');
-include_once('../lib/csrf.php');
-
-if (!auth_admin()){
-    header('Location: ./login.php');
-    exit();
-}
-
+include_once('auth.php');
+include_once('./lib/csrf.php');
 
 header('Content-Type: application/json');
 
@@ -19,6 +9,7 @@ if (empty($_REQUEST['action']) || !preg_match('/^\w+$/', $_REQUEST['action'])) {
 	echo json_encode(array('failed'=>'undefined'));
 	exit();
 }
+
 csrf_verifyNonce($_REQUEST['action'],$_POST['nonce']);
 
 // The following calls the appropriate function based to the request parameter $_REQUEST['action'],
@@ -38,4 +29,5 @@ try {
 } catch(Exception $e) {
 	echo 'while(1);' . json_encode(array('failed' => $e->getMessage()));
 }
+
 ?>
