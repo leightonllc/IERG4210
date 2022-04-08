@@ -4,6 +4,8 @@ function auth_admin(){
     if (!empty($_SESSION['admin_token']))
     return $_SESSION['admin_token']['em'];
     if (!empty($_COOKIE['admin_token'])){
+        //stripslashes() Returns a string with blackslashes stripped off.
+        //(\' becomes' and so on.)
         if ($t =json_decode(stripslashes($_COOKIE['admin_token']), true)){
             if (time() > $t['exp'])
                 return false;
@@ -18,6 +20,7 @@ function auth_admin(){
                     return $t['em'];
                 }
             }
+
         }
     }
     return false;

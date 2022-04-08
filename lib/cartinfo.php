@@ -10,7 +10,7 @@ session_start();
     global $db;
     $db = configDB();
     $_GET['pid'] = (int)$_GET['pid'];
-    $q = $db->prepare('SELECT pid, name, price FROM products WHERE pid = ?');
+    $q = $db->prepare('SELECT pid, name, price, description FROM products WHERE pid = ?');
     $q->execute(array($_GET['pid']));
     echo json_encode($q->fetchAll());
 ?>

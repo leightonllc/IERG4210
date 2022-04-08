@@ -38,19 +38,18 @@ if ($_SESSION['user_token']||$_SESSION['admin_token']){
                     <div class="card bg-primary text-white" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
 
-                            <form class="mb-md-5 mt-md-4 pb-5 needs-validation" action="auth-process.php?action=signup"
-                                method="post">
+                            <form class="mb-md-5 mt-md-4 pb-5 needs-validation" action="auth-process.php?action=signup" method="post">
 
                                 <h2 class="fw-bold mb-2 text-uppercase">Sign Up</h2>
                                 <p class="text-white mb-5">Please enter a pair of login and password!</p>
-                                <input type="email" id="email" name="email" class="form-control form-control-lg my-3"
-                                    required="required" />
-                                <input type="password" autocomplete="new-password" id="new-password" name="pw"
-                                    class="form-control form-control-lg my-3" required="required" />
+                                    <input type="email" id="email" placeholder="Email Address" name="email" class="form-control form-control-lg my-3"
+                                        required="required" />
+                                    <input type="password" placeholder="New Password" pattern="^[\w@#$%!\^\&\*\-]+$" autocomplete="new-password" id="new-password" name="pw" class="form-control form-control-lg my-3"
+                                        required="required" />
                                 </p>
 
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Sign Up</button>
-                                <input type="hidden" name="nonce" value="<?php echo csrf_getNonce('signup'); ?>" />
+                                <input type="hidden" name="nonce" value="<?php echo csrf_getNonce('signup'); ?>"/>
                             </form>
 
                             <div>

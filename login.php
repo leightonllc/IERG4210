@@ -37,41 +37,39 @@ include_once('./lib/csrf.php');
                     <div class="card bg-primary text-white" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
 
-                            <form class="mb-md-5 mt-md-4 pb-5 needs-validation" action="auth-process.php?action=login"
-                                method="post">
+                            <form class="mb-md-5 mt-md-4 pb-5 needs-validation" action="auth-process.php?action=login" method="post">
 
                                 <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                                 <p class="text-white mb-5">Please enter your login and password!</p>
-                                <?php
+                                    <?php
                                       if ($_SESSION['wrong_credential'] == 1)
                                       echo '<div class="alert alert-dismissible alert-secondary fade show">
   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
   Wrong credentials. Please check again.
 </div>';
                                     ?>
-                                <?php
+                                    <?php
                                       if ($_SESSION['change_success'] == 1)
                                       echo '<div class="alert alert-dismissible alert-info fade show">
   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
   Password changed successfully. Please login again with the new password.
 </div>';
                                     ?>
-                                <input type="email" id="email" name="email" class="form-control form-control-lg my-3"
-                                    required="required" />
+                                    <input type="email" id="email" name="email" class="form-control form-control-lg my-3"
+                                        required="required" />
 
-                                <input type="password" autocomplete="current-password" id="current-password" name="pw"
-                                    class="form-control form-control-lg my-3" required="required" />
+                                    <input type="password" autocomplete="current-password" id="current-password" name="pw" class="form-control form-control-lg my-3"
+                                        required="required" />
 
                                 <p class="small mb-5 pb-lg-2"><a class="text-white" href="#!">Forgot password?</a>
                                 </p>
 
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-                                <input type="hidden" name="nonce" value="<?php echo csrf_getNonce('login'); ?>" />
+                                <input type="hidden" name="nonce" value="<?php echo csrf_getNonce('login'); ?>"/>
                             </form>
 
                             <div>
-                                <p class="mb-0">Don't have an account? <a href="../signup.php"
-                                        class="text-white-50 fw-bold">Sign
+                                <p class="mb-0">Don't have an account? <a href="../signup.php" class="text-white-50 fw-bold">Sign
                                         Up</a></p>
                             </div>
 

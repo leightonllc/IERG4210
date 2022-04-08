@@ -33,6 +33,15 @@ function ierg4210_cat_fetchall()
     if ($q->execute()) return $q->fetchAll();
 }
 
+function ierg4210_order_fetchall()
+{
+    // DB manipulation
+    global $db;
+    $db = ierg4210_DB();
+    $q = $db->prepare("SELECT * FROM record LIMIT 100;");
+    if ($q->execute()) return $q->fetchAll();
+}
+
 function ierg4210_prod_insert()
 {
 
@@ -228,6 +237,22 @@ function ierg4210_prod_fetchOne($pid){
  
 }
 
+function ierg4210_order_fetchFive($username){
+    global $db;
+    $name = htmlspecialchars($username);
+    
+    $db = ierg4210_DB();
+    $q = $db->prepare("SELECT * FROM record WHERE username = ? LIMIT 5");
+    $q -> bindParam(1, $name);
+    
+    if ($q->execute())
+    {
+        return $q->fetchAll();
+    }
+
+ 
+}
+
 
 function ierg4210_cat_fetchOne($catid){
     global $db;
@@ -375,3 +400,4 @@ function ierg4210_prod_delete()
     header('Location: ../admin.php');
     exit();
 }
+

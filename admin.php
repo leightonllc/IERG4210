@@ -14,6 +14,7 @@ if (!auth_admin()){
 require __DIR__.'/admin/lib/db.inc.php';
 $res = ierg4210_cat_fetchall();
 $res2 = ierg4210_prod_fetchall();
+$order = ierg4210_order_fetchall();
 $options = '';
 $prodoptions = '';
 
@@ -69,7 +70,7 @@ foreach ($res2 as $value){
                          <input type="hidden" name="nonce" value="' . csrf_getNonce("logout"). '"/>
 
                     </form>
-                  </li>';
+                  </li><li class="nav-item"><a href="../changepw.php" class = "nav-link active">Change Password</a></li>';
                   else
                   echo '<li class="nav-item">
                      <a href="../login.php" class = "nav-link active">Login</a>
@@ -151,11 +152,11 @@ foreach ($res2 as $value){
             <div> <input class="form-control" id="prod_price" type="text" name="price" required="required"
                 pattern="^\d+.?\d{0,}$" /></div>
             <label class="mt-1" for="prod_desc"> Description *</label>
-            <div> <input class="form-control" id="prod_desc" type="text" name="description" required="required" />
-            </div>
+            <div> <input class="form-control" id="prod_desc" type="text" name="description" pattern="^[\w\- ()]+$"
+                required="required" /> </div>
             <label class="mt-1" for="prod_inventory"> Inventory *</label>
             <div> <input class="form-control" id="prod_inventory" type="text" name="inventory" required="required"
-                pattern"^\d*$" /> </div>
+                pattern="^\d*$" /> </div>
             <label class="mt-1" for="prod_image"> Image * </label>
             <div> <input class="mb-2 form-control" type="file" id="prod_image" name="file" required="required"
                 onchange="loadFile1(event)" accept="image/jpeg, image/png, image/gif" /> </div>
@@ -192,8 +193,8 @@ foreach ($res2 as $value){
             <div> <input class="form-control" id="prod_price" type="text" name="price" required="required"
                 pattern="^\d+.?\d{0,}$" /></div>
             <label class="mt-1" for="prod_desc"> Description *</label>
-            <div> <input class="form-control" id="prod_desc" type="text" name="description" required="required" />
-            </div>
+            <div> <input class="form-control" id="prod_desc" type="text" name="description" pattern="^[\w\- ()]+$"
+                required="required" /> </div>
             <label class="mt-1" for="prod_inventory"> Inventory *</label>
             <div> <input class="form-control" id="prod_inventory" type="text" name="inventory" required="required"
                 pattern="^\d*$" /> </div>
@@ -230,6 +231,38 @@ foreach ($res2 as $value){
         </fieldset>
       </div>
     </div>
+
+    <div class="card mx-4 my-2 col-md-6 col-lg-4 col-xl-8">
+      <div class="card-body">
+          <legend>Last 100 Orders</legend>
+          <span> All records here are verified by Paypal IPN with match digest.</span>
+          <table class="table table-xl table-hover">
+            <tr>
+              <th>Transaction ID</th>
+              <th>Username</th>
+              <th>Payment Status</th>
+              <th>Product List</th>
+              <th>Total Amount</th>
+            </tr>
+            <?php
+            foreach ($order as $value){
+            echo '<tr><td> ' . $value["txnid"] . '</td>';
+            echo '<td> ' . $value["username"] . '</td>';
+            echo '<td> Completed </td>';
+            echo '<td> ';
+            foreach (json_decode($value["digest"], true)["items"] as $list){
+              echo $list["quantity"] . " x " . $list["name"];
+            }
+            echo '</td>';
+            echo '<td> ' . json_decode($value["digest"], true)["total"] . '</td></tr>';
+            }
+          ?>
+          </table>
+          
+      </div>
+    </div>
+
+
   </div>
 </body>
 <footer class="static-bottom mt-5 text-muted bg-light container-fluid">

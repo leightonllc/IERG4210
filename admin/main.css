@@ -1,23 +1,12 @@
-html {
-  overflow-x: hidden;
-}
+html { overflow-x: hidden;}
+body { padding-top: 55px;}
+a { all: unset;}
 
-body {
-  padding-top: 55px;
-}
-
-a {
-  all: unset;
-}
-
-.table {
-  max-width: 300px !important;
-  transform: scale(0.9);
-  transform: translate(-11px, 0px);
+.table {max-width: 300px !important;
+transform:scale(0.9);
+transform: translate(-11px,0px);
 }
 
 @media (prefers-color-scheme: dark) {
-  .bg-light {
-    background-color: #405c7c !important;
-  }
+  .bg-light   { background-color: #405c7c !important;}
 }

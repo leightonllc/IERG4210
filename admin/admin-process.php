@@ -19,6 +19,7 @@ if (empty($_REQUEST['action']) || !preg_match('/^\w+$/', $_REQUEST['action'])) {
 	echo json_encode(array('failed'=>'undefined'));
 	exit();
 }
+var_dump($_POST['nonce']);
 csrf_verifyNonce($_REQUEST['action'],$_POST['nonce']);
 
 // The following calls the appropriate function based to the request parameter $_REQUEST['action'],
