@@ -30,9 +30,3 @@ PW: 98'!70Ss
 User Account:<br/>
 ID: sb-nnczk15618652@personal.example.com<br/>
 PW: CcH<8NTT
-
-## Bugs not solved
-
-- I was not able to compute the SHA256-encrypted digest again with the same algorithm, as stringified JSON objects are different all the time.
-
-Apart from the bug above, I have tried to make sure that everything is sticked to the marking scheme.
